@@ -102,7 +102,12 @@ public class Coches {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Coches [id=" + id + ", matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", color="
+				+ color + ", potencia=" + potencia + ", foto=" + foto + "]";
+	}
 	
 
 }
