@@ -9,6 +9,7 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 @RequestMapping("/home")
 public class Controlador {
+	private static final String INDEX_VIEW = "index";
 
 	@GetMapping("/")
 	public RedirectView redirect1() {
@@ -17,7 +18,7 @@ public class Controlador {
 	
 	@GetMapping("/index")
 	public ModelAndView principal() {
-		ModelAndView mav = new ModelAndView("index");
+		ModelAndView mav = new ModelAndView(INDEX_VIEW);
 		return mav;
 	}
 }
