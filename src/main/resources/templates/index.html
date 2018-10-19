@@ -3,11 +3,62 @@
 <head>
 <meta charset="UTF-8">
 <title>Menú de opciones</title>
+<style>
+	.button {
+	    display: inline-block;
+	    width: 115px;
+	    height: 25px;
+	    background: #4E9CAF;
+	    padding: 10px;
+	    text-align: center;
+	    border-radius: 5px;
+	    color: white;
+	    font-weight: bold;
+	}
+	.button:hover {
+	    display: inline-block;
+	    width: 115px;
+	    height: 25px;
+	    background: white;
+	    padding: 10px;
+	    text-align: center;
+	    border-radius: 5px;
+	    color: #4E9CAF;
+	    font-weight: bold;
+	    border: 1px solid red;
+	}
+	body{
+		margin: 0 auto;
+		padding: 0;
+		width: 100%;
+		background-color: lightorange;
+	}
+	a.button{
+		text-decoration-line: none;
+	}
+	
+	body div{
+		margin: 0 auto;
+		text-align: center;
+	}
+	footer div{
+		width: 33%;
+		margin: 0 auto;
+		position: relative;
+	}
+	
+</style>
 </head>
 <body>
-	<a th:href="@{'/carreras'}">Testing</a>
-	<footer>Esta aplicación ha sido desarrollada en Java Spring Framework
+	<div>
+		<a class="button" th:href="@{'/coches'}">Coches</a>
+		<a class="button" th:href="@{'/carreras'}">Carreras</a>
+	</div>
+	<footer>
+	<div>
+	Esta aplicación ha sido desarrollada en Java Spring Framework
 		 por Adrián Carrasco Pérez (2018) para la asignatura de Acceso a Datos.
+	</div>
 	</footer>
 </body>
 </html>
