@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="coches")
-public class Coches {
+public class Coche {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -32,11 +32,11 @@ public class Coches {
 	@Column(name="foto")
 	private String foto;
 	
-	public Coches() {
+	public Coche() {
 		
 	}
 
-	public Coches(int id, String matricula, String marca, String modelo, String color, int potencia, String foto) {
+	public Coche(int id, String matricula, String marca, String modelo, String color, int potencia, String foto) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -105,7 +105,7 @@ public class Coches {
 
 	@Override
 	public String toString() {
-		return "Coches [id=" + id + ", matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", color="
+		return "Coche [id=" + id + ", matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", color="
 				+ color + ", potencia=" + potencia + ", foto=" + foto + "]";
 	}
 	
