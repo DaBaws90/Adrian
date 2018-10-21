@@ -1,8 +1,11 @@
 package com.example.Adrian.controller;
 
+import javax.validation.Valid;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class CochesController {
 	private static final String COCHES_VIEW="cochesIndex";
 	private static final String COCHES_ADD="cochesAdd";
+	private static final String COCHES_EDIT="cochesEdit";
 	private static Log LOG = LogFactory.getLog(CochesController.class);
 	
 	@GetMapping("/")
@@ -33,15 +37,25 @@ public class CochesController {
 	
 	@GetMapping("/editCars/{matricula}")
 	public ModelAndView editCar(@PathVariable(name="matricula") String mat) {
-		ModelAndView mav = new ModelAndView(COCHES_ADD);
+		ModelAndView mav = new ModelAndView(COCHES_EDIT);
 		mav.addObject("cocheModel", cocheService.findByName(mat));
 		return mav;
 	}
 	
 	@PostMapping("/editCar")
-	public String addCar(@ModelAttribute("cocheModel") CocheModel cocheModel) {
+	public String addCar(@Valid @ModelAttribute("cocheModel") CocheModel cocheModel, BindingResult bindingResult) {
+		if(bindingResult.hasErrors()) {
+			return "redirect:/coches/cochesEdit";
+		}
 		cocheService.update(cocheModel);
 		return "redirect:/coches/index";
+	}
+	
+	@GetMapping("/deleteCar")
+	public RedirectView deleteCar(String mat) {
+		
+		courseService.delete(mat);
+		return new RedirectView(COCHES_VIEW);
 	}
 
 }
