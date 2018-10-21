@@ -36,14 +36,15 @@ public class CochesController {
 	}
 	
 	@GetMapping("/editCars/{matricula}")
-	public ModelAndView editCar(@PathVariable(name="matricula") String mat) {
+	public ModelAndView editCars(@PathVariable(name="matricula") String mat) {
 		ModelAndView mav = new ModelAndView(COCHES_EDIT);
 		mav.addObject("cocheModel", cocheService.findByName(mat));
+		LOG.info("METHOD: editCar ---- DATA: "+cocheService.findByName(mat));
 		return mav;
 	}
 	
 	@PostMapping("/editCar")
-	public String addCar(@Valid @ModelAttribute("cocheModel") CocheModel cocheModel, BindingResult bindingResult) {
+	public String editCar(@Valid @ModelAttribute("cocheModel") CocheModel cocheModel, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()) {
 			return "redirect:/coches/cochesEdit";
 		}
