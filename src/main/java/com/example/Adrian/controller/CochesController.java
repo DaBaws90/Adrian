@@ -1,5 +1,7 @@
 package com.example.Adrian.controller;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 public class CochesController {
 	private static final String COCHES_VIEW="cochesIndex";
 	private static final String COCHES_ADD="cochesAdd";
+	private static Log LOG = LogFactory.getLog(CochesController.class);
 	
 	@GetMapping("/")
 	public RedirectView redirect1() {
@@ -23,7 +26,8 @@ public class CochesController {
 	@GetMapping("/index")
 	public ModelAndView cochesIndex() {
 		ModelAndView mav = new ModelAndView(COCHES_VIEW);
-		mav.addObject("coches", cocheService.listAllCourses());
+		mav.addObject("coches", cocheService.listAllCoches());
+		LOG.info("DATA RETREIVED FROM Coche ENTITY: " + cocheService.listAllCoches());
 		return mav;
 	}
 	
