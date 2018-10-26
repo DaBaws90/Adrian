@@ -1,12 +1,20 @@
 package com.example.Adrian.entity;
 
+
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity(name="coches")
+@Entity
+@Table(name="coches")
 public class Coche {
 	
 	@Id
@@ -32,11 +40,15 @@ public class Coche {
 	@Column(name="foto")
 	private String foto;
 	
+	@OneToMany(mappedBy="idCoche", cascade = CascadeType.ALL)
+	private List<Participacion> participaciones;
+	
 	public Coche() {
 		
 	}
 
-	public Coche(int id, String matricula, String marca, String modelo, String color, int potencia, String foto) {
+	public Coche(int id, String matricula, String marca, String modelo, String color, int potencia, String foto,
+			List<Participacion> participaciones) {
 		super();
 		this.id = id;
 		this.matricula = matricula;
@@ -45,6 +57,7 @@ public class Coche {
 		this.color = color;
 		this.potencia = potencia;
 		this.foto = foto;
+		this.participaciones = participaciones;
 	}
 
 	public int getId() {
@@ -102,6 +115,14 @@ public class Coche {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+	
+	public List<Participacion> getParticipaciones(){
+		return participaciones;
+	}
+	
+	public void setParticipaciones(List<Participacion> participaciones) {
+		this.participaciones = participaciones;
+	}
 
 	@Override
 	public String toString() {
@@ -109,5 +130,4 @@ public class Coche {
 				+ color + ", potencia=" + potencia + ", foto=" + foto + "]";
 	}
 	
-
 }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.Adrian.entity.Coche;
 
-@Repository("cochesJpaRepository")
+@Repository("cocheJpaRepository")
 public interface CocheJpaRepository extends JpaRepository<Coche, Serializable>{
 	public abstract Coche findByMatricula(String mat);
 

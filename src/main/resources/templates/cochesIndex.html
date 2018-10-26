@@ -3,8 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Listado de coches</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" 
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
 <body>
-	<h1>Testeo güeno de Cadi</h1>
+	<table>
+		<tr>
+			<th>Matrícula</th>
+			<th>Marca</th>
+			<th>Modelo</th>
+			<th>Color</th>
+			<th>Potencia</th>
+			<th>Foto</th>
+			<th></th>
+			<th></th>			
+		</tr>
+		<tr th:each="coche : ${cochesModel}">
+			<td><span th:text="${coche.matricula}">Matricula</span></td>
+			<td><span th:text="${coche.marca}">Marca</span></td>
+			<td><span th:text="${coche.modelo}">Modelo</span></td>
+			<td><span th:text="${coche.color}">Color</span></td>
+			<td><span th:text="${coche.potencia}">Potencia</span></td>
+			<td><span th:text="${coche.foto}">Foto</span></td>
+			<td><a th:href="@{'/coches/editCars/' + ${coche.matricula}}"><i class="far fa-edit"></i></a></td>
+			<td><a th:href="@{'/coches/deleteCar/' + ${coche.matricula}}"><i class="far fa-trash"></i></a></td>
+			<!-- th:if="${teacher.gender == 'F'}">Female</span> -->
+			<td><span th:if="${exito == 1}">Se realizó la edición con éxito</span></td>
+			<td><span th:if="${exito == 2}">Se realizó el borrado con éxito</span></td>
+		</tr>
+	</table>
 </body>
 </html>

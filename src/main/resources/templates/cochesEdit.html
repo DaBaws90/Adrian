@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="#" th:action="@{/coches/editCar}" th:object="${cocheModel}" method="POST">
+		<td><input type="text" value="${cocheModel.matricula}" th:field="*{matricula}"/></td>
+		<td><input type="text" value="${cocheModel.marca}" th:field="*{marca}"/></td>
+		<td><input type="text" value="${cocheModel.modelo}" th:field="*{modelo}"/></td>
+		<td><input type="text" value="${cocheModel.color}" th:field="*{color}"/></td>
+		<td><input type="number" value="${cocheModel.potencia}" th:field="*{potencia}"/></td>
+		<td><input type="file" value="${cocheModel.foto}" th:field="*{foto}"/></td>
+		<td><input type="submit" value="Editar">
+	</form>
+</body>
+</html>
