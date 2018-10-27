@@ -35,7 +35,7 @@ public class CocheServiceImpl implements CocheService{
 
 	@Override
 	public Coche addCoche(CocheModel cocheModel) {
-		if(findByMatricula(cocheModel.getMatricula()) != null) {
+		if(cocheJpaRepository.findByMatricula(cocheModel.getMatricula()) != null) {
 			return null;
 		}
 		else {

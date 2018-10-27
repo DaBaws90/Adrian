@@ -27,6 +27,7 @@
 			<td><span th:text="${coche.foto}">Foto</span></td>
 			<td><a th:href="@{'/coches/editCars/' + ${coche.matricula}}"><i class="far fa-edit"></i></a></td>
 			<td><a th:href="@{'/coches/deleteCar/' + ${coche.matricula}}"><i class="far fa-trash-alt"></i></a></td>
+			<td><a th:href="@{'/coches/addCars'}"><i class="fas fa-plus"> Añadir nuevo coche</i></a>
 		</tr>
 		<tr>
 			<td><span th:if="${edicion == 1}">Se realizó la edición con éxito</span></td>

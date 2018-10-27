@@ -104,7 +104,7 @@ public class CochesController {
 	}
 
 	@PostMapping("/addCar")
-	public ModelAndView addCar(@Valid @ModelAttribute(name="cocheModel") CocheModel cocheModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+	public ModelAndView addCar(@Valid @ModelAttribute("cocheModel") CocheModel cocheModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		LOG.info("METHOD: addCar ---- CAR TO INSERT: "+cocheModel);
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
@@ -113,10 +113,12 @@ public class CochesController {
 		else {
 			//if(cocheService.findByMatricula(cocheModel.getMatricula()) == null) {
 			if(cocheService.addCoche(cocheModel) != null) {
+				LOG.info("CAR ADDED SUCCESFULLY");
 				mav.setViewName("redirect:/coches/index");
 				redirectAttributes.addFlashAttribute("insert", 1);
 			}
 			else {
+				LOG.info("UNABLE TO ADD THE CAR");
 				mav.setViewName("redirect:/coches/addCars/"+cocheModel.getMatricula());
 				redirectAttributes.addFlashAttribute("insert", 0);
 			}
