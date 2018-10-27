@@ -10,6 +10,6 @@ public interface CocheService {
 	public abstract List<CocheModel> listAllCoches();
 	public abstract Coche addCoche(CocheModel cocheModel);
 	public abstract Coche updateCoche(CocheModel cocheModel);
-	public abstract void deleteCoche(CocheModel cocheModel);
+	public abstract boolean deleteCoche(String matricula);
 	public abstract CocheModel findByMatricula(String mat);
 }

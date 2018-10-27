@@ -43,7 +43,7 @@ public class CochesController {
 	@GetMapping("/index") 
 	public ModelAndView cochesIndex() {
 		ModelAndView mav = new ModelAndView(COCHES_VIEW); //Ruta relativa respecto al controlador "/coches"
-		LOG.info("DATA RETREIVED FROM Coche ENTITY: " + cocheService.listAllCoches());
+		LOG.info("METHOD: listCars ---- DATA RETREIVED FROM Coche ENTITY: " + cocheService.listAllCoches());
 		mav.addObject("cochesModel", cocheService.listAllCoches());
 		return mav;
 	}
@@ -61,26 +61,66 @@ public class CochesController {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.setViewName(COCHES_EDIT);
-			LOG.info("Error");
+			LOG.info("ERROR IN VALIDATION FIELDS");
 		}
 		else {
-			cocheService.updateCoche(cocheModel);
-			LOG.info("CAR EDITED: "+cocheModel);
-			mav.setViewName("redirect:/coches/index");//Podemos inyectar rutas (redireccion) en lugar de templates
-			//mav.addObject("cochesModel", cocheService.listAllCoches());
-			//mav.addObject("exito", 2);
-			redirectAttributes.addFlashAttribute("exito", 1);
+			if(cocheService.updateCoche(cocheModel) != null) {
+				LOG.info("CAR EDITED SUCCESFULLY: "+cocheModel);
+				mav.setViewName("redirect:/coches/index");//Podemos inyectar rutas (redireccion) en lugar de templates
+				redirectAttributes.addFlashAttribute("edicion", 1);
+			}
+			else {
+				LOG.info("UNABLE TO EDIT THE CAR");
+				mav.setViewName(COCHES_EDIT);
+				redirectAttributes.addFlashAttribute("edicion", 0);
+			}
 		}
 		return mav;
 	}
 	
-	/*@GetMapping("/deleteCar/{matricula}")
+	@GetMapping("/deleteCar/{matricula}")
 	public ModelAndView deleteCar(@PathVariable(name="matricula") String mat, RedirectAttributes redirectAttributes) {
 		ModelAndView mav = new ModelAndView();
-		cocheService.deleteCoche(mat);
 		mav.setViewName("redirect:/coches/index");
-		redirectAttributes.addFlashAttribute("exito", 2);
-		return new RedirectView(COCHES_VIEW);
-	}*/
+		LOG.info("CAR GOING TO BE DELETED: "+cocheService.findByMatricula(mat));
+		if(cocheService.deleteCoche(mat)) {
+			redirectAttributes.addFlashAttribute("borrado", true);
+			LOG.info("DELETE SUCCESFULLY");
+		}
+		else {
+			redirectAttributes.addFlashAttribute("borrado", false);
+			LOG.info("UNABLE TO DELETE CAR");
+		}
+		return mav;
+	}
+	
+	@GetMapping("/addCars")
+	public ModelAndView addForm() {
+		ModelAndView mav = new ModelAndView();
+		//CocheModel cocheModel = new CocheModel();
+		mav.setViewName(COCHES_ADD);
+		mav.addObject("cocheModel", new CocheModel());
+		return mav;
+	}
 
+	@PostMapping("/addCar")
+	public ModelAndView addCar(@Valid @ModelAttribute(name="cocheModel") CocheModel cocheModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+		LOG.info("METHOD: addCar ---- CAR TO INSERT: "+cocheModel);
+		ModelAndView mav = new ModelAndView();
+		if(bindingResult.hasErrors()) {
+			mav.setViewName(COCHES_EDIT);
+		}
+		else {
+			//if(cocheService.findByMatricula(cocheModel.getMatricula()) == null) {
+			if(cocheService.addCoche(cocheModel) != null) {
+				mav.setViewName("redirect:/coches/index");
+				redirectAttributes.addFlashAttribute("insert", 1);
+			}
+			else {
+				mav.setViewName("redirect:/coches/addCars/"+cocheModel.getMatricula());
+				redirectAttributes.addFlashAttribute("insert", 0);
+			}
+		}
+		return mav;
+	}
 }

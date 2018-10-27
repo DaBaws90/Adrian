@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insertar nuevo registro</title>
+</head>
+<body>
+	<h2>Agregar un coche</h2>
+	<form action="#" th:action="@{/coches/addCar}" th:object="cocheModel" method="POST">
+		<p>Matrícula: <input type="text" name="matricula" th:field="*{matricula}"/></p>
+		<p th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}"></p>
+		<p>Marca: <input type="text" name="marca" th:field="*{marca}"/></p>
+		<p th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></p>
+		<p>Modelo: <input type="text" name="modelo" th:field="*{modelo}"/></p>
+		<p th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></p>
+		<p>Color: <input type="text" name="color" th:field="*{color}"/></p>
+		<p th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></p>
+		<p>Potencia: <input type="text" name="potencia" th:field="*{potencia}"/></p>
+		<p th:if="${#fields.hasErrors('marca')}" th:errors="*{potencia}"></p>
+		<p>Foto: <input type="text" name="foto" th:field="*{foto}"/></p>
+		<p th:if="${#fields.hasErrors('marca')}" th:errors="*{foto}"></p>
+		<p><input type="submit" value="Agregar"/></p>
+	</form>
+	<p><span th:if="${insert == 0}">No se pudo agregar el coche porque ya existe un registro con esa matrícula</span></p>
+</body>
+</html>

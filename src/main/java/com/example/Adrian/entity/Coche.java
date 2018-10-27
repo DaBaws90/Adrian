@@ -56,6 +56,7 @@ public class Coche {
 		this.modelo = modelo;
 		this.color = color;
 		this.potencia = potencia;
+		//this.foto = *relativeRoute*+foto;
 		this.foto = foto;
 		this.participaciones = participaciones;
 	}
@@ -109,10 +110,12 @@ public class Coche {
 	}
 
 	public String getFoto() {
+		//return *relativeRoute*+foto; (Puede ser innecesario si ya contiene la ruta en el momento de asignarle el valor al atributo)
 		return foto;
 	}
 
 	public void setFoto(String foto) {
+		//this.foto = *relativeRoute*+foto;
 		this.foto = foto;
 	}
 	

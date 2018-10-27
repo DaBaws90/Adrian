@@ -35,26 +35,41 @@ public class CocheServiceImpl implements CocheService{
 
 	@Override
 	public Coche addCoche(CocheModel cocheModel) {
-		// 
-		return null;
+		if(findByMatricula(cocheModel.getMatricula()) != null) {
+			return null;
+		}
+		else {
+			return cocheJpaRepository.save(cocheConverter.modeloEntidad(cocheModel));
+		}
+		//return cocheJpaRepository.save(cocheConverter.modeloEntidad(cocheModel));
 	}
 
 	@Override
 	public Coche updateCoche(CocheModel cocheModel) {
 		Coche coche = new Coche();
 		coche = cocheJpaRepository.findByMatricula(cocheModel.getMatricula());
-		coche.setMarca(cocheModel.getMarca());
-		coche.setModelo(cocheModel.getModelo());
-		coche.setColor(cocheModel.getColor());
-		coche.setPotencia(cocheModel.getPotencia());
-		coche.setFoto(cocheModel.getFoto());
-		return cocheJpaRepository.save(coche);
+		if(coche != null) {
+			coche.setMarca(cocheModel.getMarca());
+			coche.setModelo(cocheModel.getModelo());
+			coche.setColor(cocheModel.getColor());
+			coche.setPotencia(cocheModel.getPotencia());
+			coche.setFoto(cocheModel.getFoto());
+			return cocheJpaRepository.save(coche);
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
-	public void deleteCoche(CocheModel cocheModel) {
-		cocheJpaRepository.delete(cocheJpaRepository.findByMatricula(cocheModel.getMatricula()));
-		
+	public boolean deleteCoche(String matricula) {
+		if(cocheJpaRepository.findByMatricula(matricula) != null) {
+			cocheJpaRepository.delete(cocheJpaRepository.findByMatricula(matricula));
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 	
 	@Override
@@ -62,5 +77,4 @@ public class CocheServiceImpl implements CocheService{
 		return cocheConverter.entidadModelo(cocheJpaRepository.findByMatricula(matricula));
 	}
 	
-
 }

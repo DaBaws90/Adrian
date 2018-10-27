@@ -6,13 +6,18 @@
 </head>
 <body>
 	<form action="#" th:action="@{/coches/editCar}" th:object="${cocheModel}" method="POST">
-		<td><input type="text" value="${cocheModel.matricula}" th:field="*{matricula}"/></td>
-		<td><input type="text" value="${cocheModel.marca}" th:field="*{marca}"/></td>
-		<td><input type="text" value="${cocheModel.modelo}" th:field="*{modelo}"/></td>
-		<td><input type="text" value="${cocheModel.color}" th:field="*{color}"/></td>
-		<td><input type="number" value="${cocheModel.potencia}" th:field="*{potencia}"/></td>
-		<td><input type="file" value="${cocheModel.foto}" th:field="*{foto}"/></td>
-		<td><input type="submit" value="Editar">
+			<p>Matrícula: <input type="text" value="${cocheModel.matricula}" th:field="*{matricula}"/></p>
+			<p>Marca: <input type="text" value="${cocheModel.marca}" th:field="*{marca}"/></p>
+			<p th:if="${#fields.hasErrors('marca')}" th:errors="*{marcaa}"/></p>
+			<p>Modelo: <input type="text" value="${cocheModel.modelo}" th:field="*{modelo}"/></p>
+			<p th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"/></p>
+			<p>Color: <input type="text" value="${cocheModel.color}" th:field="*{color}"/></p>
+			<p th:if="${#fields.hasErrors('color')}" th:errors="*{color}"/></p>
+			<p>Potencia: <input type="number" value="${cocheModel.potencia}" th:field="*{potencia}"/></p>
+			<p th:if="${#fields.hasErrors('potencia')}" th:errors="*{potencia}"/></p>
+			<p>Foto: <input type="file" value="${cocheModel.foto}" th:field="*{foto}"/></p>
+			<p th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}"></p>
+			<p><input type="submit" value="Editar"></p>
 	</form>
 </body>
 </html>
