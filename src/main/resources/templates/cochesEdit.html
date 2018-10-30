@@ -2,22 +2,70 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Editar registro</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
-	<form action="#" th:action="@{/coches/editCar}" th:object="${cocheModel}" method="POST">
-			<p>Matrícula: <input type="text" value="${cocheModel.matricula}" th:field="*{matricula}"/></p>
-			<p>Marca: <input type="text" value="${cocheModel.marca}" th:field="*{marca}"/></p>
-			<p th:if="${#fields.hasErrors('marca')}" th:errors="*{marcaa}"/></p>
-			<p>Modelo: <input type="text" value="${cocheModel.modelo}" th:field="*{modelo}"/></p>
-			<p th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"/></p>
-			<p>Color: <input type="text" value="${cocheModel.color}" th:field="*{color}"/></p>
-			<p th:if="${#fields.hasErrors('color')}" th:errors="*{color}"/></p>
-			<p>Potencia: <input type="number" value="${cocheModel.potencia}" th:field="*{potencia}"/></p>
-			<p th:if="${#fields.hasErrors('potencia')}" th:errors="*{potencia}"/></p>
-			<p>Foto: <input type="file" value="${cocheModel.foto}" th:field="*{foto}"/></p>
-			<p th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}"></p>
-			<p><input type="submit" value="Editar"></p>
-	</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 mb-3 mt-3 text-center">
+				<h2>Editar coche</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<form action="#" th:action="@{/coches/editCar}" th:object="${cocheModel}" method="POST">
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="mat">Matrícula</label>
+						<div class="col-md-10">
+							<input class="form-control" type="text" id="mat" value="${cocheModel.matricula}" th:field="*{matricula}" readonly/>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="marca">Marca</label>
+						<div class="col-md-10">
+							<input class="form-control" id="marca" type="text" value="${cocheModel.marca}" th:field="*{marca}"/>
+							<p class="text-center" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"/></p>
+						</div>
+					</div>
+					<div class="form-group row">	
+						<label class="col-md-2 col-form-label" for="modelo">Modelo</label>
+						<div class="col-md-10">
+							<input class="form-control" type="text" id="modelo" value="${cocheModel.modelo}" th:field="*{modelo}"/>
+							<p class="text-center" th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"/></p>
+						</div>
+					</div>
+					<div class="form-group row">	
+						<label class="col-md-2 col-form-label" for="color">Color</label>
+						<div class="col-md-10">
+							<input class="form-control" type="text" id="color" value="${cocheModel.color}" th:field="*{color}"/>
+							<p class="text-center" th:if="${#fields.hasErrors('color')}" th:errors="*{color}"/></p>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="potencia">Potencia</label>
+						<div class="col-md-10">
+							<input class="form-control" type="number" id="potencia" value="${cocheModel.potencia}" th:field="*{potencia}"/>
+							<p class="text-center" th:if="${#fields.hasErrors('potencia')}" th:errors="*{potencia}"/></p>
+						</div>
+					</div>
+					<div class="form-group row">	
+						<label class="col-md-2 col-form-label" for="foto">Imagen</label>
+						<div class="col-md-10">
+							<input class="form-control" type="file" id="foto" value="${cocheModel.foto}" th:field="*{foto}"/>
+							<p class="text-center" th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}"></p>
+						</div>
+					</div>
+						
+					<div class="form-group row">
+						<div class="col-md-12 text-center">
+							<button type="submit" class="btn btn-primary mt-3 mb-3">Editar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -3,30 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <title>Insertar nuevo registro</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
-	<h2>Agregar un coche</h2>
-	<form action="#" th:action="@{/coches/addCar}" th:object="${cocheModel}" method="POST">
-		<p>Matrícula: <input type="text" name="matricula" th:field="*{matricula}"/></p>
-		<p th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}"></p>
-		
-		<p>Marca: <input type="text" name="marca" th:field="*{marca}"/></p>
-		<p th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></p>
-		
-		<p>Modelo: <input type="text" name="modelo" th:field="*{modelo}"/></p>
-		<p th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></p>
-		
-		<p>Color: <input type="text" name="color" th:field="*{color}"/></p>
-		<p th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></p>
-		
-		<p>Potencia: <input type="text" name="potencia" th:field="*{potencia}"/></p>
-		<p th:if="${#fields.hasErrors('potencia')}" th:errors="*{potencia}"></p>
-		
-		<p>Foto: <input type="file" name="foto" th:field="*{foto}"/></p>
-		<p th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}"></p>
-		
-		<p><input type="submit" value="Agregar"/></p>
-	</form>
-	<p><span th:if="${insert == 0}">No se pudo agregar el coche porque ya existe un registro con esa matrícula</span></p>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 mb-3 mt-3 text-center">
+				<h2>Agregar un coche</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<form action="#" th:action="@{/coches/addCar}" th:object="${cocheModel}" method="POST">
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="mat">Matrícula</label>
+						<div class="col-md-10">
+							<input class="form-control" type="text" id="mat" name="matricula" th:field="*{matricula}" placeholder="Example: AAA0000"/>
+							<p class="text-center" th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}"></p>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="marca">Marca</label>
+						<div class="col-md-10">
+							<input class="form-control" type="text" id="marca" name="marca" th:field="*{marca}" placeholder="Example: Opel"/>
+							<p class="text-center" th:if="${#fields.hasErrors('marca')}" th:errors="*{marca}"></p>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="modelo">Modelo</label>
+						<div class="col-md-10">
+							<input class="form-control" type="text" id="modelo" name="modelo" th:field="*{modelo}" placeholder="Example: Corsa"/>
+							<p class="text-center" th:if="${#fields.hasErrors('modelo')}" th:errors="*{modelo}"></p>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="color">Color</label>
+						<div class="col-md-10">
+							<input class="form-control" type="text" id="color" name="color" th:field="*{color}" placeholder="Example: Rojo"/>
+							<p class="text-center" th:if="${#fields.hasErrors('color')}" th:errors="*{color}"></p>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="potencia">Potencia</label>
+						<div class="col-md-10">
+							<input class="form-control" type="number" id="potencia" name="potencia" th:field="*{potencia}"/>
+							<p class="text-center" th:if="${#fields.hasErrors('potencia')}" th:errors="*{potencia}"></p>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="foto">Imagen</label>
+						<div class="col-md-10">
+							<input class="form-control" type="file" id="foto" name="foto" th:field="*{foto}"/>
+							<p class="text-center" th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}"></p>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-12 text-center">
+							<button type="submit" class="btn btn-primary mt-3 mb-3">Agregar</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-col-2 mx-auto text-center">
+				<p style="font-family:Segoe UI" th:if="${insert == 0}">No se pudo agregar el coche porque ya existe un registro con esa matrícula</p>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -1,7 +1,6 @@
 package com.example.Adrian.entity;
 
-
-
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="coches")
@@ -22,26 +23,36 @@ public class Coche {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="matricula")
+	@Column(name="matricula", unique = true)
+	@NotNull
+	@Size(min=7, max=7)
 	private String matricula;
 	
 	@Column(name="marca")
+	@NotNull
+	@Size(max=20)
 	private String marca;
 	
 	@Column(name="modelo")
+	@NotNull
+	@Size(max=30)
 	private String modelo;
 	
 	@Column(name="color")
+	@NotNull
+	@Size(max=20)
 	private String color;
 	
 	@Column(name="potencia")
+	@NotNull
+	//@Digits(integer=4, fraction=2)
 	private int potencia;
 	
-	@Column(name="foto")
+	@Column(name="foto", nullable = true)
 	private String foto;
 	
-	@OneToMany(mappedBy="idCoche", cascade = CascadeType.ALL)
-	private List<Participacion> participaciones;
+	@OneToMany(mappedBy="coche", cascade = CascadeType.ALL)
+	private List<Participacion> participaciones = new ArrayList<Participacion>();
 	
 	public Coche() {
 		

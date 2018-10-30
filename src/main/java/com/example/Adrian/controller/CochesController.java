@@ -65,12 +65,12 @@ public class CochesController {
 		}
 		else {
 			if(cocheService.updateCoche(cocheModel) != null) {
-				LOG.info("CAR EDITED SUCCESFULLY: "+cocheModel);
+				LOG.info("CAR EDITED SUCCESFULLY: " + cocheModel);
 				mav.setViewName("redirect:/coches/index");//Podemos inyectar rutas (redireccion) en lugar de templates
 				redirectAttributes.addFlashAttribute("edicion", 1);
 			}
 			else {
-				LOG.info("UNABLE TO EDIT THE CAR");
+				LOG.info("UNABLE TO EDIT THE CAR" + cocheModel);
 				mav.setViewName(COCHES_EDIT);
 				redirectAttributes.addFlashAttribute("edicion", 0);
 			}
@@ -108,7 +108,7 @@ public class CochesController {
 		LOG.info("METHOD: addCar ---- CAR TO INSERT: "+cocheModel);
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
-			mav.setViewName(COCHES_EDIT);
+			mav.setViewName(COCHES_ADD);
 		}
 		else {
 			//if(cocheService.findByMatricula(cocheModel.getMatricula()) == null) {
@@ -119,7 +119,7 @@ public class CochesController {
 			}
 			else {
 				LOG.info("UNABLE TO ADD THE CAR");
-				mav.setViewName("redirect:/coches/addCars/"+cocheModel.getMatricula());
+				mav.setViewName("redirect:/coches/addCars");
 				redirectAttributes.addFlashAttribute("insert", 0);
 			}
 		}

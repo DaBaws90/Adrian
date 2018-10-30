@@ -17,16 +17,22 @@ public class Participacion {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="idCoche")
+	@Column(name="id_coche", updatable = false)
 	@NotNull
 	private int idCoche;
 	
-	@Column(name="idCarrera")
+	@Column(name="id_carrera", updatable = false)
 	@NotNull
 	private int idCarrera;
 	
 	@NotNull
 	private int posicion;
+	
+	
+	private Coche coche;
+	
+	
+	private Carrera carrera;
 	
 
 }
