@@ -1,12 +1,11 @@
 package com.example.Adrian.model;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 public class CarreraModel {
 	
@@ -14,32 +13,32 @@ public class CarreraModel {
 	
 	@NotNull
 	@NotEmpty
-	@Size(min=1, max=30)
+	@Size(min=1, max=50)
 	private String nombre;
 	
-	@NotEmpty
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@NotNull
+	//@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fecha;
 
 	@NotNull
 	@NotEmpty
-	@Size(min=1, max=25)
+	@Size(min=1, max=50)
 	private String ciudad;
 	
-	//private List<ParticipacionModel> participaciones;
+	private List<ParticipacionModel> participaciones;
 
 	public CarreraModel() {
 		super();
 	}
 
-	public CarreraModel(int id, @NotNull @Size(min = 1, max = 30) String nombre, Date fecha,
-			@NotNull @Size(min = 1, max = 25) String ciudad/*, List<ParticipacionModel> participaciones*/) {
+	public CarreraModel(int id, String nombre, Date fecha,
+			String ciudad, List<ParticipacionModel> participaciones) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.fecha = fecha;
 		this.ciudad = ciudad;
-		//this.participaciones = participaciones;
+		this.participaciones = participaciones;
 	}
 
 	public int getId() {
@@ -74,18 +73,19 @@ public class CarreraModel {
 		this.ciudad = ciudad;
 	}
 
-	/*public List<ParticipacionModel> getParticipaciones() {
+	public List<ParticipacionModel> getParticipaciones() {
 		return participaciones;
 	}
 
 	public void setParticipaciones(List<ParticipacionModel> participaciones) {
 		this.participaciones = participaciones;
-	}*/
+	}
 
 	@Override
 	public String toString() {
-		return "CarreraModel [id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", ciudad=" + ciudad + "]";
+		return "CarreraModel [id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", ciudad=" + ciudad
+				+ ", participaciones=" + participaciones + "]";
 	}
-	
+
 
 }

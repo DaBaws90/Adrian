@@ -11,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="coches")
@@ -23,32 +21,23 @@ public class Coche {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name="matricula", unique = true)
-	@NotNull
-	@Size(min=7, max=7)
+	@Column(name="matricula")
 	private String matricula;
 	
 	@Column(name="marca")
-	@NotNull
-	@Size(max=20)
 	private String marca;
 	
 	@Column(name="modelo")
-	@NotNull
-	@Size(max=30)
 	private String modelo;
 	
 	@Column(name="color")
-	@NotNull
-	@Size(max=20)
 	private String color;
 	
 	@Column(name="potencia")
-	@NotNull
 	//@Digits(integer=4, fraction=2)
 	private int potencia;
 	
-	@Column(name="foto", nullable = true)
+	@Column(name="foto")
 	private String foto;
 	
 	@OneToMany(mappedBy="coche", cascade = CascadeType.ALL)
@@ -136,6 +125,10 @@ public class Coche {
 	
 	public void setParticipaciones(List<Participacion> participaciones) {
 		this.participaciones = participaciones;
+	}
+	
+	public void addParticipacion(Participacion participacion) {
+		this.participaciones.add(participacion);
 	}
 
 	@Override

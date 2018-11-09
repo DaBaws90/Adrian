@@ -97,7 +97,6 @@ public class CochesController {
 	@GetMapping("/addCars")
 	public ModelAndView addForm() {
 		ModelAndView mav = new ModelAndView();
-		//CocheModel cocheModel = new CocheModel();
 		mav.setViewName(COCHES_ADD);
 		mav.addObject("cocheModel", new CocheModel());
 		return mav;
@@ -109,6 +108,7 @@ public class CochesController {
 		ModelAndView mav = new ModelAndView();
 		if(bindingResult.hasErrors()) {
 			mav.setViewName(COCHES_ADD);
+			LOG.info("ERROR IN VALIDATION FIELDS");
 		}
 		else {
 			//if(cocheService.findByMatricula(cocheModel.getMatricula()) == null) {

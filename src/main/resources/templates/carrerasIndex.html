@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Listado de carreras</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" 
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<style>
+		body{
+			background-color: black;
+		}
+		h2{
+			color: white;
+		}
+		.customDiv{
+			background-color: gray;
+		}
+		p{
+			color: white;
+			font-family: Segoe UI;
+		}
+		.c{
+			font-family: Segoe UI;
+		}
+	</style>
+</head>
+<body>
+	<div class="container ">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 mt-3 text-center">
+				<h2>Listado de carreras</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2 mt-2 mb-2">
+				<a th:href="@{'/carreras/addRaces'}"><i class="fas fa-plus"></i> Añadir nueva carrera</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<table class="table table-dark">
+					<thead>
+						<tr scope="row">
+							<th scope="col">Nombre</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Ciudad</th>
+							<th scope="col"></th>
+							<th scope="col"></th>			
+						</tr>
+					</thead>
+					<tbody>
+						<tr scope="row" th:each="carrera : ${carrerasModel}">
+							<td><span th:text="${carrera.nombre}">Nombre</span></td>
+							<td><span th:text="${carrera.fecha}">Fecha</span></td>
+							<td><span th:text="${carrera.ciudad}">Ciudad</span></td>
+							<td><a th:href="@{'/carreras/editRaces/' + ${carrera.id}}"><i class="far fa-edit"></i></a></td>
+							<td><a th:href="@{'/carreras/deleteRace/' + ${carrera.id}}"><i class="far fa-trash-alt"></i></a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<p th:if="${edicion == 1}">Se realizó la edición con éxito</p>
+				<p th:if="${borrado == true}">Se eliminó el registro con éxito</p>
+				<p th:if="${borrado == false}">No se pudo eliminar el registro</p>
+				<p th:if="${insert == 1}">Se agregó con éxito el registro</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

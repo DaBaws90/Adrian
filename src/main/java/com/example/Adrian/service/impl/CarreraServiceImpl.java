@@ -26,11 +26,6 @@ public class CarreraServiceImpl implements CarreraService{
 
 	@Override
 	public List<CarreraModel> listAllCarreras() {
-		/*List<CarreraModel> carreraModel = new ArrayList<CarreraModel>();
-		for(Carrera carrera : carreraJpaRepository.findAll()) {
-			carreraModel.add(carreraConverter.entidadModelo(carrera));
-		}
-		return carreraModel;*/
 		List<CarreraModel> carreraModel = new ArrayList<CarreraModel>();
 		carreraJpaRepository.findAll().forEach(c ->{
 			carreraModel.add(carreraConverter.entidadModelo(c));
@@ -40,14 +35,12 @@ public class CarreraServiceImpl implements CarreraService{
 
 	@Override
 	public Carrera addCarrera(CarreraModel carreraModel) {
-		// TODO Auto-generated method stub
-		return null;
+		return carreraJpaRepository.save(carreraConverter.modeloEntidad(carreraModel));
 	}
 
 	@Override
-	public Carrera updateCarrera(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Carrera updateCarrera(CarreraModel carreraModel) {
+		return carreraJpaRepository.save(carreraConverter.modeloEntidad(carreraModel));
 	}
 
 	@Override
@@ -59,6 +52,11 @@ public class CarreraServiceImpl implements CarreraService{
 		else {
 			return false;
 		}
+	}
+	
+	@Override
+	public CarreraModel findById(int id) {
+		return carreraConverter.entidadModelo(carreraJpaRepository.findById(id));
 	}
 
 }

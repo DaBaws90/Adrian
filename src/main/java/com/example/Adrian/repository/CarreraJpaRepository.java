@@ -9,6 +9,6 @@ import com.example.Adrian.entity.Carrera;
 
 @Repository("carreraJpaRepository")
 public interface CarreraJpaRepository extends JpaRepository<Carrera, Serializable>{
-	
+	public abstract Carrera findById(int id);
 
 }

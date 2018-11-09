@@ -1,14 +1,13 @@
 package com.example.Adrian.model;
 
+import java.util.List;
+
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class CocheModel {
-	
-	/*@NotNull
-	private int id;*/
 	
 	@NotEmpty
 	@Pattern(regexp="^[a-zA-Z]{3}[0-9]{4}", message="Formato permitido: 3 letras y 4 dígitos")
@@ -22,7 +21,7 @@ public class CocheModel {
 	
 	@NotNull
 	@NotEmpty
-	@Size(min=1, max=30)
+	@Size(min=1, max=20)
 	private String modelo;
 	
 	@NotNull
@@ -30,20 +29,18 @@ public class CocheModel {
 	@Size(min=1, max=20)
 	private String color;
 	
-	@NotNull
-	@NotEmpty
 	private int potencia;
 	
 	private String foto;
 	
-	//private List<ParticipacionModel> participaciones;
+	private List<ParticipacionModel> participaciones;
 	
 	public CocheModel() {
 		
 	}
 
-	public CocheModel(String matricula, String marca, String modelo, String color, int potencia, String foto/*,
-			List<ParticipacionModel> participaciones*/) {
+	public CocheModel(String matricula, String marca, String modelo, String color, int potencia, String foto,
+			List<ParticipacionModel> participaciones) {
 		super();
 		this.matricula = matricula;
 		this.marca = marca;
@@ -51,7 +48,7 @@ public class CocheModel {
 		this.color = color;
 		this.potencia = potencia;
 		this.foto = foto;
-		//this.participaciones = participaciones;
+		this.participaciones = participaciones;
 	}
 
 	public String getMatricula() {
@@ -102,13 +99,13 @@ public class CocheModel {
 		this.foto = foto;
 	}
 
-	/*public List<ParticipacionModel> getParticipaciones() {
+	public List<ParticipacionModel> getParticipaciones() {
 		return participaciones;
 	}
 
 	public void setParticipaciones(List<ParticipacionModel> participaciones) {
 		this.participaciones = participaciones;
-	}*/
+	}
 
 	@Override
 	public String toString() {
