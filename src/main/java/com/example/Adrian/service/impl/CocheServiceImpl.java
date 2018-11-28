@@ -1,11 +1,16 @@
 package com.example.Adrian.service.impl;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.example.Adrian.converter.CocheConverter;
 import com.example.Adrian.entity.Coche;
@@ -26,10 +31,7 @@ public class CocheServiceImpl implements CocheService{
 	
 	@Override
 	public List<CocheModel> listAllCoches() {
-		List<CocheModel> cocheModel = new ArrayList<CocheModel>();
-		for(Coche coche: cocheJpaRepository.findAll()) {
-			cocheModel.add(cocheConverter.entidadModelo(coche));
-		}
+		List<CocheModel> cocheModel = cocheJpaRepository.findAll().stream().map(c -> cocheConverter.entidadModelo(c)).collect(Collectors.toList());
 		return cocheModel;
 	}
 
@@ -74,7 +76,33 @@ public class CocheServiceImpl implements CocheService{
 	
 	@Override
 	public CocheModel findByMatricula(String matricula) {
-		return cocheConverter.entidadModelo(cocheJpaRepository.findByMatricula(matricula));
+		if(cocheJpaRepository.findByMatricula(matricula) == null) {
+			return null;
+		}
+		else {
+			return cocheConverter.entidadModelo(cocheJpaRepository.findByMatricula(matricula));
+		}
 	}
 	
+	@Override
+	public String saveFile(MultipartFile img) throws IOException{
+		if(!img.isEmpty()) {
+			byte[] bytes = img.getBytes();
+			String location = ".//src//main//resources//static//images//";
+			Path path = Paths.get(location + img.getOriginalFilename());
+			Files.write(path, bytes);
+			//return location + img.getOriginalFilename();
+			return img.getOriginalFilename();
+		}
+		return "";
+	}
+	
+	@Override
+	public void deleteFile(String foto) throws IOException{
+		if(!foto.isEmpty()) {
+			String location = ".//src//main//resources//static//images//";
+			Path path = Paths.get(location + foto);
+			Files.deleteIfExists(path);
+		}
+	}
 }

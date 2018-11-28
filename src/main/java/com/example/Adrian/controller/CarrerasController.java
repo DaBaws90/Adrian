@@ -20,13 +20,12 @@ import org.springframework.web.servlet.view.RedirectView;
 import com.example.Adrian.model.CarreraModel;
 import com.example.Adrian.service.CarreraService;
 
+import constant.Constants;
+
 @Controller
 @RequestMapping("/carreras")
 public class CarrerasController {
 	
-	private static final String INDEX_VIEW = "carrerasIndex";
-	private static final String EDIT_VIEW = "carrerasEdit";
-	private static final String ADD_VIEW = "carrerasAdd";
 	private static final Log LOG = LogFactory.getLog(CarrerasController.class);
 	
 	@Autowired
@@ -35,41 +34,45 @@ public class CarrerasController {
 	
 	@GetMapping("/")
 	public RedirectView redirect1() {
+		LOG.info("REDIRECTING TO: /carreras/index FROM /carreras/");
 		return new RedirectView("/carreras/index");
 	}
 	
 	@GetMapping("/index")
 	public ModelAndView index() {
-		ModelAndView mav = new ModelAndView(INDEX_VIEW);
+		ModelAndView mav = new ModelAndView(Constants.RACES_INDEX);
+		LOG.info("METHOD (GET): listRaces (INDEX_VIEW) ---- DATA RETRIEVED FROM Carrera MODEL: " + carreraService.listAllCarreras());
 		mav.addObject("carrerasModel", carreraService.listAllCarreras());
 		return mav;
 	}
 	
 	@GetMapping("/editRaces/{id}")
 	public ModelAndView editRaces(@PathVariable(name="id") int id) {
-		ModelAndView mav = new ModelAndView();
-		LOG.info("METHOD: editRaces ---- RACE GOING TO BE EDITED: " + carreraService.findById(id));
+		ModelAndView mav = new ModelAndView(Constants.RACES_EDIT);
+		LOG.info("METHOD (GET): editRaces (EDIT_VIEW) ---- RACE GOING TO BE EDITED: " + carreraService.findById(id));
 		mav.addObject("carreraModel", carreraService.findById(id));
+		mav.addObject("participationsModel", carreraService.findById(id).getParticipaciones());
 		return mav;
 	}
 	
 	@PostMapping("/editRace")
 	public ModelAndView editRace(@Valid @ModelAttribute("carreraModel") CarreraModel carreraModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		ModelAndView mav = new ModelAndView();
-		LOG.info("METHOD: editRace --- RACE DATA MODIFIED: " + carreraModel);
+		LOG.info("METHOD (POST): editRace --- RACE DATA MODIFIED: " + carreraModel);
 		if(bindingResult.hasErrors()) {
-			mav.setViewName(EDIT_VIEW);
-			LOG.info("ERROR IN VALIDATION FIELDS");
+			mav.setViewName(Constants.RACES_EDIT);
+			LOG.info("ERROR IN VALIDATION FIELDS ---- RETURNING TO EDIT_VIEW");
 		}
 		else {
 			if(carreraService.updateCarrera(carreraModel) != null) {
 				LOG.info("RACE EDITED SUCCESFULLY: " + carreraModel);
+				LOG.info("REDIRECTING TO INDEX_VIEW");
 				mav.setViewName("redirect:/carreras/index");
 				redirectAttributes.addFlashAttribute("edicion", 1);
 			}
 			else {
 				LOG.info("UNABLE TO EDIT THE RACE");
-				mav.setViewName(EDIT_VIEW);
+				mav.setViewName(Constants.RACES_EDIT);
 				redirectAttributes.addFlashAttribute("edicion", 0);
 			}
 		}
@@ -77,9 +80,10 @@ public class CarrerasController {
 	}
 	
 	@GetMapping("/addRaces")
-	public ModelAndView addRaces(@ModelAttribute("carreraModel") CarreraModel carreraModel) {
+	public ModelAndView addRaces() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(ADD_VIEW);
+		LOG.info("METHOD (GET): addRaces ---- REQUEST TO ADD A NEW RACE ---- REDIRECTING TO ADD_VIEW TEMPLATE");
+		mav.setViewName(Constants.RACES_ADD);
 		mav.addObject("carreraModel", new CarreraModel());
 		return mav;
 	}
@@ -87,10 +91,10 @@ public class CarrerasController {
 	@PostMapping("/addRace")
 	public ModelAndView addRace(@Valid @ModelAttribute("carreraModel") CarreraModel carreraModel, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 		ModelAndView mav = new ModelAndView();
-		LOG.info("METHOD: addRace ---- RACE TO BE INSERTED: " + carreraModel);
+		LOG.info("METHOD (GET): addRace ---- RACE TO BE INSERTED: " + carreraModel);
 		if(bindingResult.hasErrors()) {
-			mav.setViewName(ADD_VIEW);
-			LOG.info("ERROR IN VALIDATION FIELDS");
+			mav.setViewName(Constants.RACES_ADD);
+			LOG.info("ERROR IN VALIDATION FIELDS ---- RETURNING TO EDIT_VIEW");
 		}
 		else {
 			if(carreraService.addCarrera(carreraModel) != null) {
@@ -100,7 +104,7 @@ public class CarrerasController {
 			}
 			else {
 				LOG.info("UNABLE TO INSERT RACE");
-				mav.setViewName(ADD_VIEW);
+				mav.setViewName(Constants.RACES_ADD);
 				redirectAttributes.addFlashAttribute("insert", 0);
 			}
 		}
@@ -110,7 +114,7 @@ public class CarrerasController {
 	@GetMapping("/deleteRace/{id}")
 	public ModelAndView deleteRace(@PathVariable(name="id") int id, RedirectAttributes redirectAttributes) {
 		ModelAndView mav = new ModelAndView();
-		LOG.info("METHOD: deleteRace ---- RACE TO BE DELETED: " + carreraService.findById(id));
+		LOG.info("METHOD (GET): deleteRace ---- RACE TO BE DELETED: " + carreraService.findById(id));
 		mav.setViewName("redirect:/carreras/index");
 		if(carreraService.deleteCarrera(id)) {
 			LOG.info("RACE DELETED SUCCESFULLY");

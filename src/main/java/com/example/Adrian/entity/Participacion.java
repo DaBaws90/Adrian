@@ -2,6 +2,7 @@ package com.example.Adrian.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,12 +22,12 @@ public class Participacion {
 	@Column(name="posicion")
 	private int posicion;
 	
-	@ManyToOne
-	@JoinColumn(name="idcoche", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="idcoche")
 	private Coche coche;
 	
-	@ManyToOne
-	@JoinColumn(name="idcarrera", nullable = false)//nombre en minusculas para evitar cambiar "naming strategy" en application.properties
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="idcarrera")//nombre en minusculas para evitar cambiar "naming strategy" en application.properties
 	private Carrera carrera;
 
 	public Participacion() {

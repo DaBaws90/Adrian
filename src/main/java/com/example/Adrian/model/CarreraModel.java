@@ -83,8 +83,7 @@ public class CarreraModel {
 
 	@Override
 	public String toString() {
-		return "CarreraModel [id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", ciudad=" + ciudad
-				+ ", participaciones=" + participaciones + "]";
+		return "CarreraModel [id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", ciudad=" + ciudad + "]";
 	}
 
 

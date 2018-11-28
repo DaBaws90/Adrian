@@ -5,8 +5,82 @@
 <title>Editar registro</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" 
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 </head>
+<style>
+		body{
+			background-color: black;
+		}
+		h2{
+			color: white;
+		}
+		h3{
+			color: white;
+			font-family: Segoe UI;
+		}
+		label{
+			color: white;
+			font-family: Segoe UI;
+		}
+		.customDiv{
+			background-color: gray;
+		}
+		p{
+			color: white;
+			font-family: Segoe UI;
+		}
+		.c{
+			font-family: Segoe UI;
+		}
+		.container-fluid{
+			padding-left: 0 !important;
+			padding-right: 0;
+		}
+		.form-inline{
+			margin-right: 3%;
+		}
+		.collapse.navbar-collapse{
+			margin-left: 2%;
+		}
+		.navbar-brand{
+			margin-left: 3%;
+		}
+		.nav-item.nav-link.active{
+			margin-right: 6%;
+			padding-left: 0;
+		}
+		.pic{
+			width: 100%;
+			max-height: 280px;
+			overflow: hidden;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+		}
+	</style>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Sistema gestor</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link active" th:href="@{'/home/'}">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" th:href="@{'/coches/'}">Coches</a>
+				<a class="nav-item nav-link" th:href="@{'/carreras/'}">Carreras</a>
+				<a class="nav-item nav-link" th:href="@{'/participaciones/'}">Participaciones</a>
+				<!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+			</div>
+		</div>
+		<form class="form-inline" method="GET" th:action="@{'/participaciones/search/'}">
+		    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		</form>
+	</nav>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8 offset-md-2 mb-3 mt-3 text-center">
@@ -15,10 +89,11 @@
 		</div>
 		<div class="row">
 			<div class="col-md-10 offset-md-1">
-				<form action="#" th:action="@{/coches/editCar}" th:object="${cocheModel}" method="POST">
+				<form enctype="multipart/form-data" action="#" th:action="@{/coches/editCar}" th:object="${cocheModel}" method="POST">
+					<!-- <input type="hidden" th:value="${cocheModel.id}" th:field="*{id}"/>-->
 					<div class="form-group row">
 						<label class="col-md-2 col-form-label" for="mat">Matrícula</label>
-						<div class="col-md-10">
+						<div class="col-md-10 mb-2">
 							<input class="form-control" type="text" id="mat" value="${cocheModel.matricula}" th:field="*{matricula}" readonly/>
 						</div>
 					</div>
@@ -50,20 +125,76 @@
 							<p class="text-center" th:if="${#fields.hasErrors('potencia')}" th:errors="*{potencia}"/></p>
 						</div>
 					</div>
-					<div class="form-group row">	
+					<div class="form-group row">
 						<label class="col-md-2 col-form-label" for="foto">Imagen</label>
-						<div class="col-md-10">
-							<input class="form-control" type="file" id="foto" value="${cocheModel.foto}" th:field="*{foto}"/>
-							<p class="text-center" th:if="${#fields.hasErrors('foto')}" th:errors="*{foto}"></p>
+						<div class="col-md-10 mb-3">
+							<input class="form-control" type="file" th:value="${foto}" id="foto" name="file"/>
+						</div>
+					</div>
+					
+					<div style="margin:0 auto" class="row justify-content-center align-items-center">
+						<div class="col-md-12 ">
+							<div>
+								<img class="img-fluid rounded mx-auto d-block" th:src="@{/images/} + ${cocheModel.foto}"/>
+							</div>
 						</div>
 					</div>
 						
 					<div class="form-group row">
 						<div class="col-md-12 text-center">
-							<button type="submit" class="btn btn-primary mt-3 mb-3">Editar</button>
+							<button type="submit" class="btn btn-primary mt-3 mb-5">Editar</button>
+							<a class="float-left mt-4" th:href="@{'/coches/'}"><i class="fas fa-chevron-left"> </i> Atrás</a>
 						</div>
 					</div>
 				</form>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<p th:if="${edicion == 0}" >No se pudo realizar la edición</h3>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container mt-3">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<h3>Listado de participaciones</h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2 mt-2 mb-2">
+				<a th:href="@{'/participaciones/addParticipations'}"><i class="fas fa-plus"></i> Añadir participación</a>
+				<a class="float-right" th:href="@{'/participaciones/'}"><i class="fas fa-list"></i> Listado de participaciones</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<table class="table table-dark">
+					<thead>
+						<tr scope="row">
+							<th class="justify text-center" scope="col">Marca del coche</th>
+							<th class="justify text-center" scope="col">Modelo del coche</th>
+							<th class="justify text-center" scope="col">Nombre de la carrera</th>
+							<th class="justify text-center" scope="col">Fecha de la carrera</th>
+							<th class="justify text-center" scope="col">Posición</th>
+							<th scope="col"></th>
+							<th scope="col"></th>			
+						</tr>
+					</thead>
+					<tbody>
+						<tr scope="row" th:each="parModel : ${participationsModel}">
+							<td class="justify text-center"><span th:text="${parModel.getCoche().getMarca()}">Marca del coche</span></td>
+							<td class="justify text-center"><span th:text="${parModel.getCoche().getModelo()}">Modelo del coche</span></td>
+							<td class="justify text-center"><span th:text="${parModel.getCarrera().getNombre()}">Nombre de la carrera</span></td>
+							<td class="justify text-center"><span th:text="${parModel.getCarrera().getFecha()}">Fecha de la carrera</span></td>
+							<td class="justify text-center"><span th:text="${parModel.posicion}">Posición</span></td>
+							<!--<td><a th:href="@{'/coches/editCars/' + ${coche.matricula}}"><i class="far fa-edit"></i></a></td>
+							<td><a th:href="@{'/coches/deleteCar/' + ${coche.matricula}}"><i class="far fa-trash-alt"></i></a></td> -->
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>

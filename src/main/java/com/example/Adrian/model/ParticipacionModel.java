@@ -1,36 +1,31 @@
 package com.example.Adrian.model;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-
-import com.example.Adrian.entity.Carrera;
-import com.example.Adrian.entity.Coche;
 
 public class ParticipacionModel {
 
 	private int id;
 	
 	@NotNull
-	@NotEmpty
-	private Coche coche;
+	private CocheModel cocheModel;
 	
 	@NotNull
-	@NotEmpty
-	private Carrera carrera;
-	
+	private CarreraModel carreraModel;
+
 	@NotNull
-	@NotEmpty
-	private int posicion;
+	@Min(1)
+	private Integer posicion;
 
 	public ParticipacionModel() {
 		super();
 	}
 
-	public ParticipacionModel(int id, Coche coche, Carrera carrera, int posicion) {
+	public ParticipacionModel(int id, CocheModel coche, CarreraModel carrera, int posicion) {
 		super();
 		this.id = id;
-		this.coche = coche;
-		this.carrera = carrera;
+		this.cocheModel = coche;
+		this.carreraModel = carrera;
 		this.posicion = posicion;
 	}
 
@@ -42,33 +37,33 @@ public class ParticipacionModel {
 		this.id = id;
 	}
 
-	public Coche getCoche() {
-		return coche;
+	public CocheModel getCoche() {
+		return cocheModel;
 	}
 
-	public void setCoche(Coche coche) {
-		this.coche = coche;
+	public void setCoche(CocheModel cocheModel) {
+		this.cocheModel = cocheModel;
 	}
 
-	public Carrera getCarrera() {
-		return carrera;
+	public CarreraModel getCarrera() {
+		return carreraModel;
 	}
 
-	public void setCarrera(Carrera carrera) {
-		this.carrera = carrera;
+	public void setCarrera(CarreraModel carreraModel) {
+		this.carreraModel = carreraModel;
 	}
 
-	public int getPosicion() {
+	public Integer getPosicion() {
 		return posicion;
 	}
 
-	public void setPosicion(int posicion) {
+	public void setPosicion(Integer posicion) {
 		this.posicion = posicion;
 	}
 
 	@Override
 	public String toString() {
-		return "ParticipacionModel [id=" + id + ", coche=" + coche + ", carrera=" + carrera + ", posicion=" + posicion
+		return "ParticipacionModel [id=" + id + ", cocheModel=" + cocheModel + ", carreraModel=" + carreraModel + ", posicion=" + posicion
 				+ "]";
 	}
 }

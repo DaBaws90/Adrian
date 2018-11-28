@@ -2,12 +2,15 @@ package com.example.Adrian.model;
 
 import java.util.List;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class CocheModel {
+	
+	private int id;
 	
 	@NotEmpty
 	@Pattern(regexp="^[a-zA-Z]{3}[0-9]{4}", message="Formato permitido: 3 letras y 4 dígitos")
@@ -29,7 +32,12 @@ public class CocheModel {
 	@Size(min=1, max=20)
 	private String color;
 	
-	private int potencia;
+	/*Anotacion no funciona bien con tipos nativos de variables, por eso hay que declarar como Integer, 
+		al menos en el modelo para poder realizar la validación. Luego en la entidad trabajaremos con tipo int para evitar 
+		incompatibilidades en la base de datos, ya que Dozer cambia los tipos sin problemas*/
+	@NotNull
+	@Min(1)
+	private Integer potencia;
 	
 	private String foto;
 	
@@ -49,6 +57,14 @@ public class CocheModel {
 		this.potencia = potencia;
 		this.foto = foto;
 		this.participaciones = participaciones;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getMatricula() {
@@ -83,11 +99,11 @@ public class CocheModel {
 		this.color = color;
 	}
 
-	public int getPotencia() {
+	public Integer getPotencia() {
 		return potencia;
 	}
 
-	public void setPotencia(int potencia) {
+	public void setPotencia(Integer potencia) {
 		this.potencia = potencia;
 	}
 
@@ -109,7 +125,7 @@ public class CocheModel {
 
 	@Override
 	public String toString() {
-		return "CocheModel [matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color
+		return "CocheModel [id=" + id + ", matricula=" + matricula + ", marca=" + marca + ", modelo=" + modelo + ", color=" + color
 				+ ", potencia=" + potencia + ", foto=" + foto + "]";
 	}
 	

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Listado de participaciones</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" 
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+	<style>
+		body{
+			background-color: black;
+		}
+		h2{
+			color: white;
+		}
+		.customDiv{
+			background-color: gray;
+		}
+		p{
+			color: white;
+			font-family: Segoe UI;
+		}
+		.c{
+			font-family: Segoe UI;
+		}
+		.container-fluid{
+			padding-left: 0 !important;
+			padding-right: 0;
+		}
+		.form-inline{
+			margin-right: 3%;
+		}
+		.collapse.navbar-collapse{
+			margin-left: 2%;
+		}
+		.navbar-brand{
+			margin-left: 3%;
+		}
+		.nav-item.nav-link.active{
+			margin-right: 6%;
+			padding-left: 0;
+		}
+		.table.table-dark th{
+			 vertical-align:middle;
+			 text-align: center;
+		}
+		.table.table-dark td{
+			 vertical-align:middle;
+			 text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">Sistema gestor</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" th:href="@{'/home/'}">Home <span class="sr-only">(current)</span></a> 
+					<a class="nav-item nav-link" th:href="@{'/coches/'}">Coches</a> 
+					<a class="nav-item nav-link" th:href="@{'/carreras/'}">Carreras</a>
+					<a class="nav-item nav-link" th:href="@{'/participaciones/'}">Participaciones</a>
+					<!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+				</div>
+			</div>
+			<form class="form-inline" method="GET" th:action="@{'/participaciones/search/'}">
+			    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</nav>
+		<div class="container ">
+			<div class="row">
+				<div class="col-md-8 offset-md-2 mt-3 text-center">
+					<h2>Listado de participaciones</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8 offset-md-2 mt-2 mb-2">
+					<a th:href="@{'/participaciones/addParticipations'}"><i class="fas fa-plus"></i> Añadir participación</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8 offset-md-2">
+					<table class="table table-dark">
+						<thead>
+							<tr scope="row">
+								<th scope="col">Marca</th>
+								<th scope="col">Modelo</th>
+								<th scope="col">Carrera</th>
+								<th scope="col">Ciudad</th>
+								<th scope="col">Fecha</th>
+								<th scope="col">Posición</th>
+								<th scope="col"></th>
+								<th scope="col"></th>			
+							</tr>
+						</thead>
+						<tbody>
+							<tr scope="row" th:each="par : ${participacionesModel}">
+								<td><span th:text="${par.coche.getMarca()}">Coche</span></td>
+								<td><span th:text="${par.coche.getModelo()}">Coche</span></td>
+								<td><span th:text="${par.carrera.getNombre()}">Carrera</span></td>
+								<td><span th:text="${par.carrera.getCiudad()}">Ciudad</span></td>
+								<td><span th:text="${par.carrera.getFecha()}">Fecha</span></td>
+								<td><span th:text="${par.posicion}">Posicion</span></td>
+								<td><a th:href="@{'/participaciones/editParticipations/' + ${par.id}}"><i class="far fa-edit"></i></a></td>
+								<td><a th:href="@{'/participaciones/deleteParticipation/' + ${par.id}}"><i class="far fa-trash-alt"></i></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>				
+			</div>
+			<div class="row">
+				<div class="col-md-8 offset-md-2 text-center">
+					<p th:if="${edicion == 1}">Se realizó la edición con éxito</p>
+					<p th:if="${borrado == true}">Se eliminó el registro con éxito</p>
+					<p th:if="${borrado == false}">No se pudo eliminar el registro</p>
+					<p th:if="${insert == 1}">Se agregó con éxito el registro</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

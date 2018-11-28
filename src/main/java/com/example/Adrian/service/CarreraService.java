@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.example.Adrian.entity.Carrera;
 import com.example.Adrian.model.CarreraModel;
-import com.example.Adrian.model.CocheModel;
 
 public interface CarreraService {
 	public abstract List<CarreraModel> listAllCarreras();

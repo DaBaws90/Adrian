@@ -14,6 +14,14 @@
 		h2{
 			color: white;
 		}
+		h3{
+			color: white;
+			font-family: Segoe UI;
+		}
+		label{
+			color: white;
+			font-family: Segoe UI;
+		}
 		.customDiv{
 			background-color: gray;
 		}
@@ -24,9 +32,55 @@
 		.c{
 			font-family: Segoe UI;
 		}
+		.container-fluid{
+			padding-left: 0 !important;
+			padding-right: 0;
+		}
+		.form-inline{
+			margin-right: 3%;
+		}
+		.collapse.navbar-collapse{
+			margin-left: 2%;
+		}
+		.navbar-brand{
+			margin-left: 3%;
+		}
+		.nav-item.nav-link.active{
+			margin-right: 6%;
+			padding-left: 0;
+		}
+		.table.table-dark th{
+			 vertical-align:middle;
+			 text-align: center;
+		}
+		.table.table-dark td{
+			 vertical-align:middle;
+			 text-align: center;
+		}
 	</style>
 </head>
 <body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Sistema gestor</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link active" th:href="@{'/home/'}">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" th:href="@{'/coches/'}">Coches</a>
+				<a class="nav-item nav-link" th:href="@{'/carreras/'}">Carreras</a>
+				<a class="nav-item nav-link" th:href="@{'/participaciones/'}">Participaciones</a>
+				<!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+			</div>
+		</div>
+		<form class="form-inline" method="GET" th:action="@{'/participaciones/search/'}">
+		    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+		    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		</form>
+	</nav>
 	<div class="container ">
 		<div class="row">
 			<div class="col-md-8 offset-md-2 mt-3 text-center">
@@ -60,7 +114,7 @@
 							<td><span th:text="${coche.modelo}">Modelo</span></td>
 							<td><span th:text="${coche.color}">Color</span></td>
 							<td><span th:text="${coche.potencia}">Potencia</span></td>
-							<td><span th:text="${coche.foto}">Foto</span></td>
+							<td><img style="width:55px; height: 55px" class="img-fluid rounded mx-auto d-block" th:src="@{/images/} + ${coche.foto != '' ? coche.foto : 'default.jpg'}"/></td>
 							<td><a th:href="@{'/coches/editCars/' + ${coche.matricula}}"><i class="far fa-edit"></i></a></td>
 							<td><a th:href="@{'/coches/deleteCar/' + ${coche.matricula}}"><i class="far fa-trash-alt"></i></a></td>
 						</tr>

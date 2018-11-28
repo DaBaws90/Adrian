@@ -1,7 +1,7 @@
 package com.example.Adrian.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,10 +26,7 @@ public class CarreraServiceImpl implements CarreraService{
 
 	@Override
 	public List<CarreraModel> listAllCarreras() {
-		List<CarreraModel> carreraModel = new ArrayList<CarreraModel>();
-		carreraJpaRepository.findAll().forEach(c ->{
-			carreraModel.add(carreraConverter.entidadModelo(c));
-		});
+		List<CarreraModel> carreraModel = carreraJpaRepository.findAll().stream().map(c ->carreraConverter.entidadModelo(c)).collect(Collectors.toList());
 		return carreraModel;
 	}
 

@@ -31,7 +31,7 @@ public class Carrera {
 	@Column(name="ciudad")
 	private String ciudad;
 	
-	@OneToMany(mappedBy="carrera", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="carrera", cascade = CascadeType.REMOVE)
 	private List<Participacion> participaciones = new ArrayList<Participacion>();
 
 	public Carrera() {
@@ -89,8 +89,7 @@ public class Carrera {
 
 	@Override
 	public String toString() {
-		return "Carrera [id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", ciudad=" + ciudad
-				+ ", participaciones=" + participaciones + "]";
+		return "Carrera [id=" + id + ", nombre=" + nombre + ", fecha=" + fecha + ", ciudad=" + ciudad + "]";
 	}
 
 }

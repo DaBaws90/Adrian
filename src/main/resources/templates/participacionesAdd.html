@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Añadir registro</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" 
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+<style>
+		body{
+			background-color: black;
+		}
+		h2{
+			color: white;
+		}
+		h3{
+			color: white;
+			font-family: Segoe UI;
+		}
+		label{
+			color: white;
+			font-family: Segoe UI;
+		}
+		.customDiv{
+			background-color: gray;
+		}
+		p{
+			color: white;
+			font-family: Segoe UI;
+		}
+		.c{
+			font-family: Segoe UI;
+		}
+		.container-fluid{
+			padding-left: 0 !important;
+			padding-right: 0;
+		}
+		.form-inline{
+			margin-right: 3%;
+		}
+		.collapse.navbar-collapse{
+			margin-left: 2%;
+		}
+		.navbar-brand{
+			margin-left: 3%;
+		}
+		.nav-item.nav-link.active{
+			margin-right: 6%;
+			padding-left: 0;
+		}
+	</style>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">Sistema gestor</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<div class="navbar-nav">
+					<a class="nav-item nav-link active" th:href="@{'/home/'}">Home <span class="sr-only">(current)</span></a> 
+					<a class="nav-item nav-link" th:href="@{'/coches/'}">Coches</a> 
+					<a class="nav-item nav-link" th:href="@{'/carreras/'}">Carreras</a>
+					<a class="nav-item nav-link" th:href="@{'/participaciones/'}">Participaciones</a>
+					<!-- <a class="nav-item nav-link disabled" href="#">Disabled</a> -->
+				</div>
+			</div>
+			<form class="form-inline" method="GET" th:action="@{'/participaciones/search/'}">
+			    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+			    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+			</form>
+		</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 offset-md-2 mb-3 mt-3 text-center">
+				<h2>Añadir participación</h2>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-10 offset-md-1">
+				<form action="#" th:action="@{/participaciones/addParticipation}" th:object="${participacionModel}" method="POST">
+					<input class="form-control" type="hidden" th:field="*{id}"/>
+					
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="coche">Coche</label>
+						<div class="col-md-10">
+							<select class="form-control" id="coche" th:field="*{coche.id}">
+							<option th:each="coche : ${cochesModel}" 
+								th:value="${coche.id}" 
+								th:text="${coche.marca} +' '+ ${coche.modelo}">
+							</option>
+							</select>
+							<p class="text-center" th:if="${#fields.hasErrors('coche')}" th:errors="*{coche}"/></p>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<label class="col-md-2 col-form-label" for="carrera">Carrera</label>
+						<div class="col-md-10">
+							<select class="form-control" id="carrera" th:field="*{carrera.id}">
+							<option th:each="carrera : ${carrerasModel}" 
+								th:value="${carrera.id}" 
+								th:text="${carrera.nombre} +' - '+ ${carrera.ciudad}">
+							</option>
+							</select>
+							<p class="text-center" th:if="${#fields.hasErrors('carrera')}" th:errors="*{carrera}"/></p>
+						</div>
+					</div>
+					
+					<div class="form-group row">	
+						<label class="col-md-2 col-form-label" for="posicion">Posición</label>
+						<div class="col-md-10">
+							<input class="form-control" type="number" id="posicion" value="${participacionModel.posicion}" th:field="*{posicion}"/>
+							<p class="text-center" th:if="${#fields.hasErrors('posicion')}" th:errors="*{posicion}"/></p>
+						</div>
+					</div>
+					
+					<div class="form-group row">
+						<div class="col-md-12 text-center">
+							<button type="submit" class="btn btn-primary mt-3 mb-3">Añadir</button>
+							<a class="float-left mt-4" th:href="@{'/participaciones/'}"><i class="fas fa-chevron-left"> </i> Atrás</a>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8 offset-md-2 text-center">
+				<p th:if="${exists == 1}">Ya existe una participación con ese coche y esa carrera asignadas</p>
+			</div>
+		</div>
+	</div>	
+</body>
+</html>

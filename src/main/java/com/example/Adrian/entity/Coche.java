@@ -40,7 +40,7 @@ public class Coche {
 	@Column(name="foto")
 	private String foto;
 	
-	@OneToMany(mappedBy="coche", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="coche", cascade = CascadeType.REMOVE)
 	private List<Participacion> participaciones = new ArrayList<Participacion>();
 	
 	public Coche() {
@@ -127,9 +127,9 @@ public class Coche {
 		this.participaciones = participaciones;
 	}
 	
-	public void addParticipacion(Participacion participacion) {
+	/*public void addParticipacion(Participacion participacion) {
 		this.participaciones.add(participacion);
-	}
+	}*/
 
 	@Override
 	public String toString() {
