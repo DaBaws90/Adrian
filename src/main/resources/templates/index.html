@@ -5,63 +5,140 @@
 <title>HOME</title>
 <style>
 body {
-  background-color: #000;
-  /* height: 100%; */
+	background-color: #000;
+	/* height: 100%; */
 }
-.st0{
-	fill:#29ABE2;
+
+.st0 {
+	fill: #29ABE2;
 }
 
 .carDefault {
-    opacity:0;
-    margin-left: -800px;
+	opacity: 0;
+	margin-left: -800px;
 }
+
 .car-wrapper svg {
-    margin: 0 0 0 10%;
-    width:90%;
-    overflow: hidden;
+	margin: 0 0 0 10%;
+	width: 90%;
+	overflow: hidden;
 }
 /* car animation */
-
-
 .car-wrapper {
-    max-width: 250px;
-    margin: 0 auto;
-    margin-bottom: 50px;
-    margin-top: 150px;
-}
-@media (min-width: 1200px){
-    max-width:540px !important;
+	max-width: 250px;
+	margin: 0 auto;
+	margin-bottom: 50px;
+	margin-top: 150px;
 }
 
+@media ( min-width : 1200px) {
+	max-width
+	:
+	540px
+	 
+	!
+	important
+	;
+	
+
+}
 
 .bounce {
-    animation: bounce 0.5s infinite;
-    transform-origin: center center;
-        }
+	animation: bounce 0.5s infinite;
+	transform-origin: center center;
+}
+
 .vroom {
-    animation: vroom 3s ease;
+	animation: vroom 3s ease;
 }
-@keyframes bounce {
-    0% { transform: translate(0px,0px)  }
-    25% { transform: translate(0px,-0.35px) }
-    75% { transform: translate(-0.5px,0.35px) }
-    100% { transform: translate(0px,0px) }
+
+@
+keyframes bounce { 0% {
+	transform: translate(0px, 0px)
 }
-@keyframes vroom {
-    0% { transform: translateX(-300%)  }
-    100% { transform: translateX(0%) }
+
+25%
+{
+transform
+:
+ 
+translate
+(0px
+,
+-0
+.35px
+)
+ 
 }
-@keyframes fadeIn {
-    0% { opacity: 0  }
-    50% { opacity: 0  }
-    100% { opacity: 1 }
+75%
+{
+transform
+:
+ 
+translate
+(-0
+.5px
+,
+0
+.35px
+)
+ 
 }
-@media (min-width: 767px){
-    .car-wrapper {
-        max-width: 480px;
-    }
+100%
+{
+transform
+:
+ 
+translate
+(0px
+,
+0
+px
+)
+ 
 }
+}
+@
+keyframes vroom { 0% {
+	transform: translateX(-300%)
+}
+
+100%
+{
+transform
+:
+ 
+translateX
+(0%)
+ 
+}
+}
+@
+keyframes fadeIn { 0% {
+	opacity: 0
+}
+
+50%
+{
+opacity
+:
+ 
+0
+}
+100%
+{
+opacity
+:
+ 
+1
+}
+}
+@media ( min-width : 767px) {
+	.car-wrapper {
+		max-width: 480px;
+	}
+}
+
 .button {
 	display: inline-block;
 	width: 115px;
@@ -93,7 +170,6 @@ body {
 	width: 100%;
 	background-color: lightorange;
 } */
-
 a.button {
 	text-decoration-line: none;
 }
@@ -112,12 +188,18 @@ footer div {
 	font-family: Segoe UI;
 	font-size: 13px;
 }
-.col-xs-12{
+
+.col-xs-12 {
 	margin-bottom: 15%;
 }
 </style>
 </head>
 <body>
+	<div class="row">
+		<div class="col-md-12">
+			<a th:href="@{/login?logout}"><button class="btn btn-primary float-right" type="submit">Logout</button></a>
+		</div>
+	</div>
 	<div class="col-xs-12">
 		<div class="car-wrapper carDefault" id="jsCarWrapper">
 			<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 233 66">
@@ -146,9 +228,9 @@ footer div {
 	</div>
 
 
-	<div style="margin-top:5%">
-		<a class="button" th:href="@{'/coches/'}">Coches</a> 
-		<a class="button" th:href="@{'/carreras/'}">Carreras</a>
+	<div style="margin-top: 5%">
+		<a class="button" th:href="@{'/coches/'}">Coches</a> <a class="button"
+			th:href="@{'/carreras/'}">Carreras</a>
 	</div>
 	<footer>
 		<div>Esta aplicación ha sido desarrollada en Java Spring
@@ -156,10 +238,10 @@ footer div {
 			Acceso a Datos.</div>
 	</footer>
 	<script>
-	function goFast(){
-		  var car = document.getElementById("jsCarWrapper");
-		  car.classList.remove("carDefault");
-		  car.classList.add("vroom");
+		function goFast() {
+			var car = document.getElementById("jsCarWrapper");
+			car.classList.remove("carDefault");
+			car.classList.add("vroom");
 		}
 		goFast();
 	</script>
