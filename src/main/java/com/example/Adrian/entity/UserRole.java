@@ -16,14 +16,14 @@ public class UserRole {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="user_role_id", unique=true, nullable=false)
+	@Column(name="user_role_id"/*, unique=true, nullable=false*/)
 	private Integer userRoleId;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="username", nullable=false)
+	@JoinColumn(name="username"/*, nullable=false*/)
 	private User user;
 	
-	@Column(name="role", nullable=false, length=45)
+	@Column(name="role"/*, nullable=false, length=45*/)
 	private String role;
 
 	public UserRole() {
@@ -32,7 +32,7 @@ public class UserRole {
 
 	public UserRole(Integer userRoleId, User user, String role) {
 		super();
-		this.userRoleId = userRoleId;
+		this.userRoleId = userRoleId; // Puede ser necesario crearlo sin el Id, como en el tutorial
 		this.user = user;
 		this.role = role;
 	}

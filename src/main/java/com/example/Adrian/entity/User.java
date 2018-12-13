@@ -15,14 +15,14 @@ import javax.persistence.Table;
 public class User {
 	
 	@Id
-	@Column(name="username", unique=true, nullable=false, length=45)
+	@Column(name="username"/*, unique=true, nullable=false, length=45*/)
 	private String username;
 	
-	@Column(name="password", nullable=false, length=60)
+	@Column(name="password"/*, nullable=false, length=60*/)
 	private String password;
 	
-	@Column(name="active")
-	private boolean active;
+	@Column(name="enabled"/*, nullable=false*/)
+	private boolean enabled;
 	
 	@OneToMany(mappedBy="user", fetch=FetchType.EAGER)
 	private List<UserRole> userRole = new ArrayList<UserRole>();
@@ -31,11 +31,18 @@ public class User {
 		super();
 	}
 
-	public User(String username, String password, boolean active, List<UserRole> userRole) {
+	public User(String username, String password, boolean enabled) {
 		super();
 		this.username = username;
 		this.password = password;
-		this.active = active;
+		this.enabled = enabled;
+	}
+
+	public User(String username, String password, boolean enabled, List<UserRole> userRole) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.enabled = enabled;
 		this.userRole = userRole;
 	}
 
@@ -55,12 +62,12 @@ public class User {
 		this.password = password;
 	}
 
-	public boolean isActive() {
-		return active;
+	public boolean isEnabled() {
+		return enabled;
 	}
 
-	public void setActive(boolean active) {
-		this.active = active;
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
 	}
 
 	public List<UserRole> getUserRole() {
@@ -74,7 +81,7 @@ public class User {
 	@Override 
 	// Si da error, podría ser porque desde aquí mostramos a los roles, y en roles mostramos el usuario, por lo ue Java detecta un loop al mostrar los datos
 	public String toString() {
-		return "User [username=" + username + ", password=" + password + ", active=" + active + ", userRole=" + userRole
+		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", userRole=" + userRole
 				+ "]";
 	}
 	
