@@ -22,139 +22,61 @@
 	crossorigin="anonymous"></script> -->
 
 <style>
+/* general */
 body {
-	background-color: #000;
-	/* height: 100%; */
+  background-color: #000;
 }
-
-.st0 {
-	fill: #29ABE2;
-}
+.st0{fill:#29ABE2;}
 
 .carDefault {
-	opacity: 0;
-	margin-left: -800px;
+    opacity:0;
+    margin-left: -800px;
 }
-
 .car-wrapper svg {
-	margin: 0 0 0 10%;
-	width: 90%;
-	overflow: hidden;
+    margin: 0 0 0 10%;
+    width:90%;
+    overflow: hidden;
 }
 /* car animation */
+
+
 .car-wrapper {
-	max-width: 250px;
-	margin: 0 auto;
-	margin-bottom: 50px;
-	margin-top: 150px;
+    max-width: 250px;
+    margin: 0 auto;
+    margin-bottom: 50px;
+    margin-top: 150px;
+}
+@media (min-width: 1200px){
+    max-width:540px !important;
 }
 
-@media ( min-width : 1200px) {
-	max-width
-	:
-	540px
-	 
-	!
-	important
-	;
-	
-
-}
 
 .bounce {
-	animation: bounce 0.5s infinite;
-	transform-origin: center center;
-}
-
+    animation: bounce 0.5s infinite;
+    transform-origin: center center;
+        }
 .vroom {
-	animation: vroom 3s ease;
+    animation: vroom 3s ease;
 }
-
-@
-keyframes bounce { 0% {
-	transform: translate(0px, 0px)
+@keyframes bounce {
+    0% { transform: translate(0px,0px)  }
+    25% { transform: translate(0px,-0.35px) }
+    75% { transform: translate(-0.5px,0.35px) }
+    100% { transform: translate(0px,0px) }
 }
-
-25%
-{
-transform
-:
- 
-translate
-(0px
-,
--0
-.35px
-)
- 
+@keyframes vroom {
+    0% { transform: translateX(-300%)  }
+    100% { transform: translateX(0%) }
 }
-75%
-{
-transform
-:
- 
-translate
-(-0
-.5px
-,
-0
-.35px
-)
- 
+@keyframes fadeIn {
+    0% { opacity: 0  }
+    50% { opacity: 0  }
+    100% { opacity: 1 }
 }
-100%
-{
-transform
-:
- 
-translate
-(0px
-,
-0
-px
-)
- 
-}
-}
-@
-keyframes vroom { 0% {
-	transform: translateX(-300%)
-}
-
-100%
-{
-transform
-:
- 
-translateX
-(0%)
- 
-}
-}
-@
-keyframes fadeIn { 0% {
-	opacity: 0
-}
-
-50%
-{
-opacity
-:
- 
-0
-}
-100%
-{
-opacity
-:
- 
-1
-}
-}
-@media ( min-width : 767px) {
-	.car-wrapper {
-		max-width: 480px;
-	}
+@media (min-width: 767px){
+    .car-wrapper {
+        max-width: 480px;
+    }
 }
 
 .button {
