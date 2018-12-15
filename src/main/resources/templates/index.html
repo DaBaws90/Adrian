@@ -197,7 +197,9 @@ footer div {
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<a th:href="@{/login?logout}"><button class="btn btn-primary float-right" type="submit">Logout</button></a>
+			<form th:action="@{/logout}" method="POST">
+				<button class="btn btn-primary float-right" type="submit">Logout</button>
+			</form>
 		</div>
 	</div>
 	<div class="col-xs-12">
@@ -229,8 +231,8 @@ footer div {
 
 
 	<div style="margin-top: 5%">
-		<a class="button" th:href="@{'/coches/'}">Coches</a> <a class="button"
-			th:href="@{'/carreras/'}">Carreras</a>
+		<a class="button" th:href="@{'/coches/'}">Coches</a> 
+		<a class="button" th:href="@{'/carreras/'}">Carreras</a>
 	</div>
 	<footer>
 		<div>Esta aplicación ha sido desarrollada en Java Spring

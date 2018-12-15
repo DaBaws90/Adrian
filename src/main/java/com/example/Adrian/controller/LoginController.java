@@ -12,29 +12,20 @@ public class LoginController {
 
 	@GetMapping("/")
 	public RedirectView redirect() {
-		return new RedirectView("/login");
+		return new RedirectView("/signin");
 	}
 	
 	@GetMapping("/login")
 	public ModelAndView signin(@RequestParam(name="error", required=false) String error, @RequestParam(name="logout", required=false) String logout) {
 		ModelAndView mav = new ModelAndView(LOGIN_VIEW);
-		// mav.addObject("userCredentials", new UserCredentials());
 		mav.addObject("error", error);
 		mav.addObject("logout", logout);
 		return mav;
 	}
 	
-//	@PostMapping("signin")
-//	public ModelAndView loginCheck(@ModelAttribute("userCredentials") UserCredentials userCredentials, RedirectAttributes redirectAttributes) {
-//		ModelAndView mav = new ModelAndView();
-//		if(userCredentials.getUsername().equals("user") && userCredentials.getPassword().equals("user")) {
-//			mav.setViewName("redirect:/home/");
-//			//redirectAttributes.addFlashAttribute("error", 0);
-//		}
-//		else {
-//			mav.setViewName("redirect:/login?error");
-//			//redirectAttributes.addFlashAttribute("error", 1);
-//		}
-//		return mav;
-//	}
+	@GetMapping("/signin")
+	public ModelAndView loginCheck(/*RedirectAttributes redirectAttributes*/) {
+		ModelAndView mav = new ModelAndView("redirect:/home/index");
+		return mav;
+	}
 }
