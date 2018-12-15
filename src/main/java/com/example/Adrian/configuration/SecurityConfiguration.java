@@ -1,4 +1,4 @@
-package configuration;
+package com.example.Adrian.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,22 +15,26 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	@Qualifier("userService")
+	@Qualifier("userServiceImpl")
 	private UserDetailsService userService;
 	
 	@Autowired
 	private void configureGlobal(AuthenticationManagerBuilder authentication) throws Exception{
+//		PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//		authentication.inMemoryAuthentication()
+//		.withUser("user").password("{noop}user").roles("ROLE_USER");
 		authentication.userDetailsService(userService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Override
-	protected void configure(HttpSecurity http) throws Exception {
+	protected void configure(final HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		http.authorizeRequests().antMatchers("/css/*", "/imgs/*").permitAll()
 			.anyRequest().authenticated().and()
 			.formLogin().loginPage("/login").loginProcessingUrl("/signin")
-			.usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/signin").permitAll().and()
+			.usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/signin", true).permitAll().and()
 			.logout().logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll();
 	}
-	
+
+
 }

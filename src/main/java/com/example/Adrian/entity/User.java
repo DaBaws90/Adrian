@@ -79,7 +79,7 @@ public class User {
 	}
 
 	@Override 
-	// Si da error, podría ser porque desde aquí mostramos a los roles, y en roles mostramos el usuario, por lo ue Java detecta un loop al mostrar los datos
+// Si da error, podría ser porque desde aquí mostramos a los roles, y en roles mostramos el usuario, por lo ue Java detecta un loop al mostrar los datos
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", enabled=" + enabled + ", userRole=" + userRole
 				+ "]";

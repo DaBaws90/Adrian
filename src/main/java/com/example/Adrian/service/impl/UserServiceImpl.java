@@ -17,8 +17,8 @@ import org.springframework.stereotype.Service;
 import com.example.Adrian.entity.UserRole;
 import com.example.Adrian.repository.UserJpaRepository;
 
-@Service("userService")
-public class UserService implements UserDetailsService{
+@Service("userServiceImpl")
+public class UserServiceImpl implements UserDetailsService{
 
 	@Autowired
 	@Qualifier("userJpaRepository")

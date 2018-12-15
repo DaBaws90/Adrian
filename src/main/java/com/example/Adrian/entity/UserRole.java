@@ -8,10 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="user_role", uniqueConstraints=@UniqueConstraint(columnNames= {"role", "username"}))
+@Table(name="user_role"/*, uniqueConstraints=@UniqueConstraint(columnNames= {"role", "username"})*/)
 public class UserRole {
 	
 	@Id

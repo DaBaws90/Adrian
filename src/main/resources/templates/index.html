@@ -3,6 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <title>HOME</title>
+<!-- BootStrap 4 -->
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous"> -->
+<!-- jQuery and JS -->
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script> -->
+
 <style>
 body {
 	background-color: #000;
@@ -195,13 +213,6 @@ footer div {
 </style>
 </head>
 <body>
-	<div class="row">
-		<div class="col-md-12">
-			<form th:action="@{/logout}" method="POST">
-				<button class="btn btn-primary float-right" type="submit">Logout</button>
-			</form>
-		</div>
-	</div>
 	<div class="col-xs-12">
 		<div class="car-wrapper carDefault" id="jsCarWrapper">
 			<svg xmlns="https://www.w3.org/2000/svg" viewBox="0 0 233 66">
@@ -233,6 +244,14 @@ footer div {
 	<div style="margin-top: 5%">
 		<a class="button" th:href="@{'/coches/'}">Coches</a> 
 		<a class="button" th:href="@{'/carreras/'}">Carreras</a>
+	</div>
+	
+	<div class="row">
+		<div class="col-md-12">
+			<form th:action="@{/logout}">
+				<button type="submit">Logout</button>
+			</form>
+		</div>
 	</div>
 	<footer>
 		<div>Esta aplicación ha sido desarrollada en Java Spring

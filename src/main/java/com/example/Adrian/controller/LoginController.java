@@ -25,7 +25,7 @@ public class LoginController {
 	
 	@GetMapping("/signin")
 	public ModelAndView loginCheck(/*RedirectAttributes redirectAttributes*/) {
-		ModelAndView mav = new ModelAndView("redirect:/home/index");
+		ModelAndView mav = new ModelAndView("redirect:/home/");
 		return mav;
 	}
 }
